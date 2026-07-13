@@ -1,12 +1,13 @@
-const CACHE_VERSION = 'traxo-v1';
-const SCOPE = '/Traxo-app/';
+const CACHE_VERSION = 'traxo-v2';
 
+// Paths are relative to this file's own location, so this works
+// regardless of the exact case of the repo/folder name in the URL.
 const CORE_ASSETS = [
-  SCOPE,
-  SCOPE + 'index.html',
-  SCOPE + 'manifest.json',
-  SCOPE + 'icon-192.png',
-  SCOPE + 'icon-512.png'
+  './',
+  './index.html',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 // Install: pre-cache the app shell
@@ -48,7 +49,7 @@ self.addEventListener('fetch', event => {
           caches.open(CACHE_VERSION).then(cache => cache.put(req, resClone));
           return res;
         })
-        .catch(() => caches.match(req).then(cached => cached || caches.match(SCOPE + 'index.html')))
+        .catch(() => caches.match(req).then(cached => cached || caches.match('./index.html')))
     );
     return;
   }
